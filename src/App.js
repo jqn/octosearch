@@ -1,5 +1,6 @@
 import "App.css";
 import Header from "components/Header";
+import UserList from "components/UserList";
 import Search from "screens/Search";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Header />
       <Search />
+      <UserList />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const Search = () => {
     const fetchData = async () => {
       const result = await axios({
         method: "get",
-        url: `https://api.github.com/search/users?q=${query}&per_page=20&page=2`,
+        url: `https://api.github.com/search/users?q=${query}&per_page=20&page=1`,
         headers: { Accept: "application/vnd.github.v3+json" },
       });
       console.log(
