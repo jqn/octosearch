@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    // set base url to ./src to allow us to directly
-    // import components without ../../../
     "baseUrl": "./src"
   }
 }

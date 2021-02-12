@@ -1,11 +1,12 @@
-import "./App.css";
+import "App.css";
+import Header from "components/Header";
+import SearchForm from "components/SearchForm";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>OctoSearch</h1>
-      </header>
+      <Header />
+      <SearchForm />
     </div>
   );
 }
