@@ -1,10 +1,20 @@
 import React from "react";
 
 const SearchForm = () => {
+  function onInputChange(event) {
+    event.preventDefault();
+  }
+
   return (
-    <form className="search-form">
-      <input type="text" name="input" value={""} autoComplete="off" />
-    </form>
+    <div className="search-form">
+      <input
+        type="text"
+        name="input"
+        value={"jqn"}
+        autoComplete="off"
+        onChange={onInputChange}
+      />
+    </div>
   );
 };
 
