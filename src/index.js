@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+// Global styles reset
 import "bootstrap/dist/css/bootstrap-reboot.css";
 
 ReactDOM.render(
