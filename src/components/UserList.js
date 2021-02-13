@@ -6,9 +6,16 @@ import { UserSearchContext } from "context/userSearchContext";
 const UserList = () => {
   const { users } = useContext(UserSearchContext);
   return (
-    <div>
+    <div className="user-list">
       {users.map((user, index) => {
-        return <ListItem key={user.id} user={user.login} url={user.url} />;
+        return (
+          <ListItem
+            key={user.id}
+            user={user.login}
+            url={user.url}
+            avatar={user.avatar_url}
+          />
+        );
       })}
     </div>
   );

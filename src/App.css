@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 80%;
+  margin: 1rem auto;
 }
 
 .App-logo {
@@ -8,26 +10,29 @@
 }
 
 
-
 .App-header {
   font-size: calc(10px + 2vmin);
-  text-align: center;
-  margin-top: 1rem;
+  text-align: left;
   margin-bottom: 1rem;
+  margin-left: 0.2em;
   color: #586069;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61DAFB;
 }
 
 .search-form {
   color: #586069;
+  padding-bottom: 0.5em;
+  text-align: left;
+  margin-left: 0.5em;
 }
 
 .search-form input {
   width: 50%;
   border: none;
+  color: #0366D6
 }
 
 .search-form input:focus {
@@ -38,3 +43,40 @@
   color: #586069;
 }
 
+.user-list {
+  border-bottom: none;
+  margin: 0.5em;
+  text-align: left;
+}
+
+.user-list .item {
+    border-bottom: 1px solid #E1E4E8;
+    color: #586069;
+    display: flex;
+    padding: 0.4rem 1rem 0.4rem 0.2rem;
+    justify-content: space-between;
+
+}
+
+.user-list .item:hover {
+   background: #f6f8fa;
+}
+
+.user-list .item:active {
+  background: #fff;
+}
+
+.user-list .avatar {
+    height: 4vmin;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.user-list .label {
+  margin-left: 1rem;
+  line-height: 2.4;
+}
+
+.user-list .more-icon {
+  color: #586069;
+}
