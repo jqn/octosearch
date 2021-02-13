@@ -22,6 +22,26 @@
   color: #61DAFB;
 }
 
+.navigation-bar {
+  text-align: right;
+  background-color: #FAFBFC;
+  padding: 0.3rem 0.8rem 0.4rem 0.2rem;
+  margin-right: 0.5em;
+  margin-left: 0.5em
+}
+
+.navigation-bar .back {
+  padding: 0.25em
+}
+
+.navigation-bar .foward {
+  padding: 0.25em
+}
+
+.navigation-bar .count {
+  padding: 0.25em;
+}
+
 .search-form {
   color: #586069;
   padding-bottom: 0.5em;
@@ -55,7 +75,6 @@
     display: flex;
     padding: 0.4rem 1rem 0.4rem 0.2rem;
     justify-content: space-between;
-
 }
 
 .user-list .item:hover {

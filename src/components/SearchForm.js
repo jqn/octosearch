@@ -6,13 +6,9 @@ const API_URL = "https://api.github.com";
 
 const SearchForm = () => {
   const [query, setQuery] = useState("");
-  const { setUsers } = useContext(UserSearchContext);
+  const { setUsers, setResultCount } = useContext(UserSearchContext);
 
   const onInputChange = (event) => {
-    console.log(
-      "🚀 ~ file: SearchForm.js ~ line 10 ~ onInputChange ~ event",
-      event.target.value
-    );
     event.preventDefault();
     setQuery(event.target.value);
   };
@@ -32,8 +28,9 @@ const SearchForm = () => {
       );
       const { data, status } = result;
       if (status === 200) {
-        const { items } = data;
+        const { items, total_count } = data;
         setUsers(items);
+        setResultCount(total_count);
         return;
       }
       setUsers([]);

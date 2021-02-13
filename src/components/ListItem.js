@@ -4,7 +4,6 @@ import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import avatar from "assets/avatar.png";
 
 const ListItem = ({ avatar, user, url }) => {
-  console.log("🚀 ~ file: ListItem.js ~ line 6 ~ ListItem ~ avatar", avatar);
   return (
     <div className="item">
       <div className="left-container">
