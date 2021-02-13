@@ -10,14 +10,10 @@ const Navigation = () => {
     setPage(1);
   };
 
-  const goFoward = () => {
+  const goForward = () => {
     let pageCount = Math.round(resultCount / 20);
-    console.log(
-      "🚀 ~ file: Navigation.js ~ line 15 ~ goFoward ~ pageCount",
-      pageCount
-    );
+
     if (page <= pageCount - 1) {
-      // jqnguyen
       setPage(page + 1);
       console.log("page", page);
     } else {
@@ -32,7 +28,7 @@ const Navigation = () => {
           <span className="back" onClick={goBack}>
             <IoChevronBack />
           </span>
-          <span className="foward" onClick={goFoward}>
+          <span className="forward" onClick={goForward}>
             <IoChevronForward />
           </span>
           <span className="count">{resultCount}</span>

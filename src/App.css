@@ -29,7 +29,7 @@
 }
 
 .navigation-bar .controls {
-    padding: 0.3rem 0.8rem 0.4rem 0.2rem;
+  padding: 0.3rem 0.8rem 0.4rem 0.2rem;
   background-color: #FAFBFC;
 }
 
@@ -37,7 +37,7 @@
   padding: 0.25em
 }
 
-.navigation-bar .foward {
+.navigation-bar .forward {
   padding: 0.25em
 }
 
@@ -73,11 +73,11 @@
 }
 
 .user-list .item {
-    border-bottom: 1px solid #E1E4E8;
-    color: #586069;
-    display: flex;
-    padding: 0.4rem 1rem 0.4rem 0.2rem;
-    justify-content: space-between;
+  border-bottom: 1px solid #E1E4E8;
+  color: #586069;
+  display: flex;
+  padding: 0.4rem 1rem 0.4rem 0.2rem;
+  justify-content: space-between;
 }
 
 .user-list .item:hover {
@@ -102,4 +102,18 @@
 .user-list .more-icon {
   color: #586069;
   align-self: center;
+}
+
+.user-card {
+  background-color: #FAFBFC;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.user-card .field-label {
+  font-weight: 600;
+}
+
+.user-card .field-label .field-text {
+  font-weight: 400;
+  margin-left: 0.2em;
 }

@@ -9,38 +9,37 @@ const UserCard = ({
   public_repos,
   public_gists,
   bio,
+  followers,
   html_url,
 }) => {
   return (
-    <div className="">
-      <p>
-        name:<span>Joaquin Guardado</span>
+    <div className="user-card">
+      <p className="field-label">
+        Name:<span className="field-text">{name}</span>
       </p>
-      <p>
-        company:<span>Reactor Labs</span>
+      <p className="field-label">
+        company:<span className="field-text">{company}</span>
       </p>
-      <p>
-        email:<span></span>
+      <p className="field-label">
+        email:<span className="field-text">{email}</span>
       </p>
-      <p>
-        location:<span>United States</span>
+      <p className="field-label">
+        location:<span className="field-text">{location}</span>
       </p>
-      <p>
+      <p className="field-label">
         bio:
-        <span>
-          I'm a problem solver and a designer of meaningful experiences.
-        </span>
+        <span className="field-text">{bio}</span>
       </p>
-      <p>
-        public repos:<span>388</span>
+      <p className="field-label">
+        public repos:<span className="field-text">{public_repos}</span>
       </p>
-      <p>
-        public gists:<span>61</span>
+      <p className="field-label">
+        public gists:<span className="field-text">{public_gists}</span>
       </p>
-      <p>
-        followers:<span>2</span>
+      <p className="field-label">
+        followers:<span className="field-text">{followers}</span>
       </p>
-      <p>https://github.com/jqn</p>
+      <p className="field-text">{html_url}</p>
     </div>
   );
 };
@@ -54,6 +53,7 @@ UserCard.defaultProps = {
   public_gists: 61,
   bio: " I'm a problem solver and a designer of meaningful experiences.",
   html_url: "https://github.com/jqn",
+  followers: 22,
 };
 
 UserCard.propTypes = {};
