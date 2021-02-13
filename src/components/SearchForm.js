@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserSearchContext } from "context/userSearchContext";
 
 const SearchForm = () => {
-  function onInputChange(event) {
+  const { users } = useContext(UserSearchContext);
+  const onInputChange = (event) => {
     event.preventDefault();
-  }
+  };
 
   return (
     <div className="search-form">
       <input
         type="text"
         name="input"
-        value={"jqn"}
         autoComplete="off"
         onChange={onInputChange}
       />

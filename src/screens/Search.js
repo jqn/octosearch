@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import SearchForm from "components/SearchForm";
+import { UserSearchContext } from "context/userSearchContext";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const { setUsers } = useContext(UserSearchContext);
 
   useEffect(() => {
     setQuery("jqn");
@@ -20,6 +22,8 @@ const Search = () => {
         "🚀 ~ file: Search.js ~ line 13 ~ fetchData ~ result",
         result
       );
+      const users = result.data.items;
+      setUsers(users);
     };
 
     if (query) {
