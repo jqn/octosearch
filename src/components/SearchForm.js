@@ -13,8 +13,13 @@ const SearchForm = () => {
     setQuery(event.target.value);
   };
 
+  const delay = (interval) =>
+    new Promise((resolve) => setTimeout(resolve, interval));
+
   useEffect(() => {
     const fetchData = async () => {
+      // Github rate limit 10 requests/minute
+      await delay(6000);
       const result = await axios({
         method: "get",
         url: `${API_URL}/search/users?q=${encodeURIComponent(

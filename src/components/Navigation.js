@@ -16,7 +16,6 @@ const Navigation = () => {
       "🚀 ~ file: Navigation.js ~ line 15 ~ goFoward ~ pageCount",
       pageCount
     );
-    // setPage(page + 1);
     if (page <= pageCount - 1) {
       // jqnguyen
       setPage(page + 1);
