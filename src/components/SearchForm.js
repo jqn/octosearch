@@ -48,7 +48,9 @@ const SearchForm = () => {
 
   return (
     <div className="search-form">
+      https://github.com<span className="slash">/</span>
       <input
+        autoFocus
         type="text"
         name="input"
         autoComplete="off"
