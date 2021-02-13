@@ -7,6 +7,7 @@ import { UserSearchContext } from "context/userSearchContext";
 const UserList = () => {
   const { users } = useContext(UserSearchContext);
   const [showCard, setShowCard] = useState(false);
+
   return (
     <div className="user-list">
       {users.map((user, index) => {

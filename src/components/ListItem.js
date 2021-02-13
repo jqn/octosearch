@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import avatar from "assets/avatar.png";
 
 const ListItem = ({ avatar, user, url, collapseCard }) => {
+  const [open, setOpen] = useState(false);
   const toggleCard = () => {
-    collapseCard(true);
+    if (open) {
+      collapseCard(false);
+      setOpen(false);
+    } else {
+      collapseCard(true);
+      setOpen(true);
+    }
   };
   return (
     <div className="item">
