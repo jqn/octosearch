@@ -6,7 +6,7 @@ const API_URL = "https://api.github.com";
 
 const SearchForm = () => {
   const [query, setQuery] = useState("");
-  const { setUsers, setResultCount } = useContext(UserSearchContext);
+  const { setUsers, setResultCount, page } = useContext(UserSearchContext);
 
   const onInputChange = (event) => {
     event.preventDefault();
@@ -19,7 +19,7 @@ const SearchForm = () => {
         method: "get",
         url: `${API_URL}/search/users?q=${encodeURIComponent(
           query
-        )}&per_page=20&page=1`,
+        )}&per_page=20&page=${page}`,
         headers: { Accept: "application/vnd.github.v3+json" },
       });
       console.log(
@@ -41,7 +41,8 @@ const SearchForm = () => {
       return;
     }
     setUsers([]);
-  }, [query, setUsers]);
+    setResultCount(0);
+  }, [query, setUsers, setResultCount, page]);
 
   return (
     <div className="search-form">

@@ -24,10 +24,13 @@
 
 .navigation-bar {
   text-align: right;
-  background-color: #FAFBFC;
-  padding: 0.3rem 0.8rem 0.4rem 0.2rem;
   margin-right: 0.5em;
   margin-left: 0.5em
+}
+
+.navigation-bar .controls {
+    padding: 0.3rem 0.8rem 0.4rem 0.2rem;
+  background-color: #FAFBFC;
 }
 
 .navigation-bar .back {
@@ -93,9 +96,10 @@
 
 .user-list .label {
   margin-left: 1rem;
-  line-height: 2.4;
+  align-self: center;
 }
 
 .user-list .more-icon {
   color: #586069;
+  align-self: center;
 }

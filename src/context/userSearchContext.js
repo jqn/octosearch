@@ -6,6 +6,7 @@ UserSearchContext.displayName = "UserSearchContext";
 export const UserSearchProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [resultCount, setResultCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   return (
     <UserSearchContext.Provider
@@ -14,6 +15,8 @@ export const UserSearchProvider = ({ children }) => {
         setUsers,
         resultCount,
         setResultCount,
+        page,
+        setPage,
       }}
     >
       {children}
