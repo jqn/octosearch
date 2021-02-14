@@ -9,7 +9,6 @@ const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
     setItemId(user.id);
     if (open) {
       collapseCard(false);
-      setItemId();
       setOpen(false);
     } else {
       collapseCard(true);
