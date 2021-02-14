@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
+import { useDebounce } from "hooks/useDebounce";
+import { useCallback } from "react";
 
 const SearchForm = ({ setQuery }) => {
-  const onInputChange = (event) => {
-    event.preventDefault();
-    setQuery(event.target.value);
-  };
+  const onInputChange = useCallback(
+    (event) => {
+      event.preventDefault();
+      setQuery(event.target.value);
+    },
+    [setQuery]
+  );
 
   return (
     <div className="search-form">
@@ -22,8 +27,8 @@ const SearchForm = ({ setQuery }) => {
   );
 };
 
-SearchForm.defaultProps = { setQuery: () => {} };
+SearchForm.defaultProps = { setQuery: () => {}, isLoading: false };
 
-SearchForm.propTypes = { setQuery: PropTypes.func };
+SearchForm.propTypes = { setQuery: PropTypes.func, isLoading: PropTypes.bool };
 
 export default SearchForm;

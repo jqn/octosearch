@@ -24,7 +24,7 @@ async function apiClient(
 
   // Github rate limit is 10 requests/minute
   // so we have to slow down things a bit
-  await delay(1000);
+  // await delay(1000);
 
   let result = await axios({
     method: config.method,

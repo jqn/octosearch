@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 
 import Header from "components/Header";
 import UserList from "components/UserList";
@@ -8,6 +8,7 @@ import Spinner from "components/Spinner";
 import ErrorCard from "components/ErrorCard";
 
 import { useAsync } from "hooks/useAsync";
+import { useDebounce } from "hooks/useDebounce";
 import { apiClient } from "services/apiClient";
 import { UserSearchContext } from "context/userSearchContext";
 
@@ -16,11 +17,45 @@ const Search = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
+  const debouncedSearchTerm = useDebounce(query, 500);
 
-  const onQueryChange = (value) => {
-    setQueried(true);
-    setQuery(value);
-  };
+  // const onQueryChange = useCallback((value) => {
+  //   // setQueried(true);
+  //   setQuery(value);
+  // }, []);
+
+  // Effect for API call
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        console.log(
+          "🚀 ~ file: Search.js ~ line 31 ~ Search ~ debouncedSearchTerm",
+          debouncedSearchTerm
+        );
+        setQueried(true);
+        // run(
+        //   apiClient(
+        //     `search/users?q=${encodeURIComponent(query)}&per_page=20&page=${1}`
+        //   )
+        // );
+        // setIsSearching(true);
+        // searchCharacters(debouncedSearchTerm).then((results) => {
+        //   setIsSearching(false);
+        //   setResults(results);
+        // });
+      } else {
+        // setResults([]);
+        setQueried(false);
+      }
+    },
+    [debouncedSearchTerm] // Only call effect if debounced search term changes
+  );
+
+  useEffect(() => {
+    if (!isLoading) {
+      setQueried(false);
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     if (!queried || !query) {
@@ -56,7 +91,7 @@ const Search = () => {
   return (
     <div className="search">
       <Header />
-      <SearchForm setQuery={(value) => onQueryChange(value)} />
+      <SearchForm setQuery={(value) => setQuery(value)} searching={isLoading} />
       {isLoading ? <Spinner /> : null}
       {isError ? <ErrorCard error={error} /> : null}
       {isSuccess ? (
