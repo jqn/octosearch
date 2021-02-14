@@ -1,53 +1,45 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import { useAsync } from "hooks/useAsync";
+import { apiClient } from "services/apiClient";
 import { UserSearchContext } from "context/userSearchContext";
 
-const API_URL = "https://api.github.com";
-
 const SearchForm = () => {
+  const { setResults } = useContext(UserSearchContext);
+  const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState("");
-  const { setUsers, setResultCount, page } = useContext(UserSearchContext);
+  const [queried, setQueried] = useState(false);
 
   const onInputChange = (event) => {
     event.preventDefault();
+    setQueried(true);
     setQuery(event.target.value);
   };
 
-  const delay = (interval) =>
-    new Promise((resolve) => setTimeout(resolve, interval));
-
   useEffect(() => {
-    const fetchData = async () => {
-      // Github rate limit 10 requests/minute
-      await delay(6000);
-      const result = await axios({
-        method: "get",
-        url: `${API_URL}/search/users?q=${encodeURIComponent(
-          query
-        )}&per_page=20&page=${page}`,
-        headers: { Accept: "application/vnd.github.v3+json" },
-      });
-      console.log(
-        "🚀 ~ file: Search.js ~ line 13 ~ fetchData ~ result",
-        result
-      );
-      const { data, status } = result;
-      if (status === 200) {
-        const { items, total_count } = data;
-        setUsers(items);
-        setResultCount(total_count);
-        return;
-      }
-      setUsers([]);
-    };
-
-    if (query) {
-      fetchData();
+    if (!queried) {
       return;
     }
-    setUsers([]);
-    setResultCount(0);
-  }, [query, setUsers, setResultCount, page]);
+
+    run(
+      apiClient(
+        `search/users?q=${encodeURIComponent(query)}&per_page=20&page=${1}`
+      )
+    );
+    setQueried(false);
+  }, [query, queried, run]);
+
+  useEffect(() => {
+    if (data) {
+      setResults(data);
+    }
+  }, [data, setResults]);
+
+  useEffect(() => {
+    console.log(
+      "🚀 ~ file: SearchForm.js ~ line 33 ~ SearchForm ~ error",
+      error
+    );
+  }, [error]);
 
   return (
     <div className="search-form">
@@ -60,6 +52,12 @@ const SearchForm = () => {
         placeholder="user"
         onChange={onInputChange}
       />
+      {isError ? (
+        <div>
+          <p>There was an error:</p>
+          <pre>{error.message}</pre>
+        </div>
+      ) : null}
     </div>
   );
 };

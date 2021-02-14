@@ -1,39 +1,39 @@
-import { queryCache } from "react-query";
-import * as auth from "auth-provider";
-const apiURL = process.env.REACT_APP_API_URL;
+// import { queryCache } from "react-query";
+// import * as auth from "auth-provider";
+import axios from "axios";
 
-async function client(
+const apiURL = "https://api.github.com";
+
+async function apiClient(
   endpoint,
-  { data, token, headers: customHeaders, ...customConfig } = {}
+  { requestData, token, headers: customHeaders, ...customConfig } = {}
 ) {
-  const config = {
-    method: data ? "POST" : "GET",
-    body: data ? JSON.stringify(data) : undefined,
-    headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
-      "Content-Type": data ? "application/json" : undefined,
-      ...customHeaders,
-    },
-    ...customConfig,
-  };
+  try {
+    const config = {
+      method: requestData ? "POST" : "GET",
+      body: requestData ? JSON.stringify(requestData) : undefined,
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": requestData ? "application/json" : undefined,
+        ...customHeaders,
+      },
+      ...customConfig,
+    };
 
-  return window
-    .fetch(`${apiURL}/${endpoint}`, config)
-    .then(async (response) => {
-      if (response.status === 401) {
-        queryCache.clear();
-        await auth.logout();
-        // refresh the page for them
-        window.location.assign(window.location);
-        return Promise.reject({ message: "Please re-authenticate." });
-      }
-      const data = await response.json();
-      if (response.ok) {
-        return data;
-      } else {
-        return Promise.reject(data);
-      }
+    let result = await axios({
+      method: config.method,
+      url: `${apiURL}/${endpoint}`,
+      headers: config.headers,
     });
+    const { status, data } = result;
+    if (status === 200) {
+      return data;
+    }
+
+    throw new Error("request falls out of the range of 2xx");
+  } catch (error) {
+    return error;
+  }
 }
 
-export { client };
+export { apiClient };

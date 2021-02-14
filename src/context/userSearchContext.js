@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useCallback } from "react";
 
 export const UserSearchContext = createContext();
 UserSearchContext.displayName = "UserSearchContext";
@@ -6,17 +6,18 @@ UserSearchContext.displayName = "UserSearchContext";
 export const UserSearchProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [resultCount, setResultCount] = useState(0);
-  const [page, setPage] = useState(1);
+
+  const setResults = useCallback((results) => {
+    setUsers(results.items);
+    setResultCount(results.total_count);
+  }, []);
 
   return (
     <UserSearchContext.Provider
       value={{
         users,
-        setUsers,
+        setResults,
         resultCount,
-        setResultCount,
-        page,
-        setPage,
       }}
     >
       {children}
