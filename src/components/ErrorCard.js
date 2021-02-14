@@ -18,9 +18,13 @@ const ErrorCard = ({ error }) => {
       return <pre>Rate Limit Exceeded</pre>;
     }
     if (status === 500) {
-      return <pre>Something Unexpected Happened!</pre>;
+      return <pre>Couldn't handle your request!</pre>;
     }
-    return <pre>We couldn't find what your looking for</pre>;
+
+    if (status === 503) {
+      return <pre>Service Unavailable</pre>;
+    }
+    return <pre>Something Unexpected Happened!</pre>;
   };
 
   return (
