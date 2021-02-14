@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 const UserCard = ({
   collapsed,
   name,
+  userId,
+  activeId,
   location,
   email,
   company,
@@ -15,8 +17,10 @@ const UserCard = ({
 }) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    setOpen(collapsed);
-  }, [collapsed]);
+    if (userId === activeId) {
+      setOpen(collapsed);
+    }
+  }, [collapsed, userId, activeId]);
 
   return (
     <>
@@ -57,6 +61,8 @@ const UserCard = ({
 UserCard.defaultProps = {
   collapsed: false,
   name: "Joaquin Guardado",
+  userId: null,
+  activeId: null,
   location: "United States",
   email: "",
   company: "Reactor Labs",
@@ -67,6 +73,8 @@ UserCard.defaultProps = {
   followers: 22,
 };
 
-UserCard.propTypes = {};
+UserCard.propTypes = {
+  collapsed: PropTypes.bool,
+};
 
 export default UserCard;

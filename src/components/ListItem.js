@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import avatar from "assets/avatar.png";
 
-const ListItem = ({ avatar, user, url, collapseCard }) => {
+const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
   const [open, setOpen] = useState(false);
   const toggleCard = () => {
+    setItemId(user.id);
     if (open) {
       collapseCard(false);
+      setItemId();
       setOpen(false);
     } else {
       collapseCard(true);
@@ -17,8 +19,8 @@ const ListItem = ({ avatar, user, url, collapseCard }) => {
   return (
     <div className="item">
       <div className="left-container">
-        <img className="avatar" src={avatar} alt="avatar" />
-        <span className="label">{user}</span>
+        <img className="avatar" src={user.avatar_url} alt="avatar" />
+        <span className="label">{user.login}</span>
       </div>
       <span className="more-icon align-self-end" onClick={toggleCard}>
         <IoEllipsisVerticalOutline />
@@ -29,16 +31,12 @@ const ListItem = ({ avatar, user, url, collapseCard }) => {
 
 ListItem.defaultProps = {
   collapseCard: () => {},
-  avatar: "",
-  user: "",
-  url: "",
+  user: {},
 };
 
 ListItem.propTypes = {
   collapseCard: PropTypes.func,
-  avatar: PropTypes.string,
-  user: PropTypes.string,
-  url: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default ListItem;

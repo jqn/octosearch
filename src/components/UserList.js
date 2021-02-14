@@ -7,6 +7,7 @@ import { UserSearchContext } from "context/userSearchContext";
 const UserList = () => {
   const { users } = useContext(UserSearchContext);
   const [showCard, setShowCard] = useState(false);
+  const [id, setId] = useState(null);
 
   return (
     <div className="user-list">
@@ -15,12 +16,17 @@ const UserList = () => {
           <>
             <ListItem
               key={user.id}
-              user={user.login}
-              url={user.url}
-              avatar={user.avatar_url}
+              user={user}
               collapseCard={(collapse) => setShowCard(collapse)}
+              setItemId={(id) => setId(id)}
             />
-            <UserCard key={`${user.node_id}-${user.id}`} collapsed={showCard} />
+            <UserCard
+              key={`${user.node_id}-${user.id}`}
+              collapsed={showCard}
+              name={user.login}
+              userId={user.id}
+              activeId={id}
+            />
           </>
         );
       })}
@@ -28,8 +34,12 @@ const UserList = () => {
   );
 };
 
-UserList.defaultProps = {};
+UserList.defaultProps = {
+  users: [],
+};
 
-UserList.propTypes = {};
+UserList.propTypes = {
+  users: PropTypes.array,
+};
 
 export default UserList;
