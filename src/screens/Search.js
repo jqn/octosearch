@@ -5,6 +5,7 @@ import UserList from "components/UserList";
 import Navigation from "components/Navigation";
 import SearchForm from "components/SearchForm";
 import Spinner from "components/Spinner";
+import ErrorCard from "components/ErrorCard";
 
 import { useAsync } from "hooks/useAsync";
 import { apiClient } from "services/apiClient";
@@ -47,7 +48,7 @@ const Search = () => {
 
   useEffect(() => {
     if (error) {
-      console.log("🚀 ~ file: Search.js ~ line 50 ~ useEffect ~ error", error);
+      console.log("🚀 ~ file: Search.js ~ line 51 ~ useEffect ~ error", error);
       setResults({ items: [], total_count: 0 });
     }
   }, [error, setResults]);
@@ -57,12 +58,7 @@ const Search = () => {
       <Header />
       <SearchForm setQuery={(value) => onQueryChange(value)} />
       {isLoading ? <Spinner /> : null}
-      {isError ? (
-        <div>
-          <p>There was an error:</p>
-          <pre>{error.message}</pre>
-        </div>
-      ) : null}
+      {isError ? <ErrorCard error={error} /> : null}
       {isSuccess ? (
         <>
           <Navigation />

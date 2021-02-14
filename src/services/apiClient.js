@@ -24,7 +24,6 @@ async function apiClient(
     url: `${apiURL}/${endpoint}`,
     headers: config.headers,
   });
-  console.log("🚀 ~ file: apiClient.js ~ line 29 ~ result", result);
   const { status, data } = result;
   if (status === 200) {
     return data;

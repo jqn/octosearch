@@ -135,8 +135,15 @@
 }
 
 .atom-spinner {
-    font-Size: 4em;
     height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-card {
+    height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
