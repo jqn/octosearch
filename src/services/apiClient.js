@@ -8,32 +8,28 @@ async function apiClient(
   endpoint,
   { requestData, token, headers: customHeaders, ...customConfig } = {}
 ) {
-  try {
-    const config = {
-      method: requestData ? "POST" : "GET",
-      body: requestData ? JSON.stringify(requestData) : undefined,
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        "Content-Type": requestData ? "application/json" : undefined,
-        ...customHeaders,
-      },
-      ...customConfig,
-    };
+  const config = {
+    method: requestData ? "POST" : "GET",
+    body: requestData ? JSON.stringify(requestData) : undefined,
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+      "Content-Type": requestData ? "application/json" : undefined,
+      ...customHeaders,
+    },
+    ...customConfig,
+  };
 
-    let result = await axios({
-      method: config.method,
-      url: `${apiURL}/${endpoint}`,
-      headers: config.headers,
-    });
-    const { status, data } = result;
-    if (status === 200) {
-      return data;
-    }
-
-    throw new Error("request falls out of the range of 2xx");
-  } catch (error) {
-    return error;
+  let result = await axios({
+    method: config.method,
+    url: `${apiURL}/${endpoint}`,
+    headers: config.headers,
+  });
+  console.log("🚀 ~ file: apiClient.js ~ line 29 ~ result", result);
+  const { status, data } = result;
+  if (status === 200) {
+    return data;
   }
+  return Promise.reject(data);
 }
 
 export { apiClient };

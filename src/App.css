@@ -133,3 +133,12 @@
   font-weight: 300;
   margin-left: 0.2em;
 }
+
+.atom-spinner {
+    font-Size: 4em;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

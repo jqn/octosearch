@@ -4,7 +4,7 @@ import { SiReact } from "react-icons/si";
 
 const Spinner = () => {
   return (
-    <div className="spinner">
+    <div className="atom-spinner">
       <SiReact className="App-logo" size="4em" />
     </div>
   );
