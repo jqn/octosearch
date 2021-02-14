@@ -17,14 +17,12 @@ const Search = () => {
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
+  // Debounce search term to only keep the latest value
+  // if searchTerm has not been updated within last 500ms.
+  // The goal is to only have the API call fire when user stops typing
+  // so that we aren't hitting our API rapidly.
   const debouncedSearchTerm = useDebounce(query, 500);
 
-  // const onQueryChange = useCallback((value) => {
-  //   // setQueried(true);
-  //   setQuery(value);
-  // }, []);
-
-  // Effect for API call
   useEffect(
     () => {
       if (debouncedSearchTerm) {
@@ -33,18 +31,7 @@ const Search = () => {
           debouncedSearchTerm
         );
         setQueried(true);
-        // run(
-        //   apiClient(
-        //     `search/users?q=${encodeURIComponent(query)}&per_page=20&page=${1}`
-        //   )
-        // );
-        // setIsSearching(true);
-        // searchCharacters(debouncedSearchTerm).then((results) => {
-        //   setIsSearching(false);
-        //   setResults(results);
-        // });
       } else {
-        // setResults([]);
         setQueried(false);
       }
     },
@@ -63,7 +50,7 @@ const Search = () => {
     }
     run(
       apiClient(
-        `search/users?q=${encodeURIComponent(query)}&per_page=20&page=${1}`
+        `search/users?q=${encodeURIComponent(query)}&per_page=1000&page=${1}`
       )
     );
     setQueried(false);

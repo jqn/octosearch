@@ -4,9 +4,6 @@ import axios from "axios";
 
 const apiURL = "https://api.github.com";
 
-const delay = (interval) =>
-  new Promise((resolve) => setTimeout(resolve, interval));
-
 async function apiClient(
   endpoint,
   { requestData, token, headers: customHeaders, ...customConfig } = {}
@@ -21,10 +18,6 @@ async function apiClient(
     },
     ...customConfig,
   };
-
-  // Github rate limit is 10 requests/minute
-  // so we have to slow down things a bit
-  // await delay(1000);
 
   let result = await axios({
     method: config.method,

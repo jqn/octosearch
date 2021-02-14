@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { useDebounce } from "hooks/useDebounce";
 import { useCallback } from "react";
 
 const SearchForm = ({ setQuery }) => {
