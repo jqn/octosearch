@@ -57,6 +57,7 @@ const SearchForm = () => {
         type="text"
         name="input"
         autoComplete="off"
+        placeholder="user"
         onChange={onInputChange}
       />
     </div>
