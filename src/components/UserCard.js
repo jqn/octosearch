@@ -31,6 +31,23 @@ const Field = ({ label = "", text = "" }) => {
         return <GoPrimitiveDot size="1.5em" />;
     }
   };
+  if (label === "html_url") {
+    return (
+      <p className="field-label">
+        {getIcon(label)}
+        <span className="field-text">
+          <a
+            href={text}
+            className="link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {text ? text : "--"}
+          </a>
+        </span>
+      </p>
+    );
+  }
   return (
     <p className="field-label">
       {getIcon(label)}
@@ -39,9 +56,21 @@ const Field = ({ label = "", text = "" }) => {
   );
 };
 
-const UserCard = ({ visible, user, loading }) => {
+const UserCard = ({ visible, user, loading, error }) => {
   if (loading) {
-    return <div>Loading</div>;
+    return (
+      <div className="loader">
+        <p>Loading</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="loader">
+        <p>Error</p>
+      </div>
+    );
   }
 
   return (

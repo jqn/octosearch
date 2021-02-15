@@ -6,9 +6,8 @@ import { useToggle } from "hooks/useToggle";
 import { useAsync } from "hooks/useAsync";
 import { apiClient } from "services/apiClient";
 
-const ListItem = ({ avatar, user, url, collapseCard }) => {
+const ListItem = ({ user }) => {
   const { data, error, run, isLoading } = useAsync();
-  const [query, setQuery] = useState("");
   const [isOn, toggleIsOn] = useToggle();
 
   const toggleCard = () => {
@@ -16,16 +15,11 @@ const ListItem = ({ avatar, user, url, collapseCard }) => {
       toggleIsOn();
       return;
     }
-    console.log("get user");
     run(apiClient(`users/${encodeURIComponent(user.login)}`));
+    // consider persisting user data and checking if user data
+    // exists. If user data get from localstorage or call api
     toggleIsOn();
   };
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log("🚀 ~ file: ListItem.js ~ line 23 ~ ListItem ~ data", data);
-  //   }
-  // }, [data]);
 
   return (
     <div className="item">
@@ -47,18 +41,16 @@ const ListItem = ({ avatar, user, url, collapseCard }) => {
           <IoEllipsisVerticalOutline size="1.5em" />
         </span>
       </div>
-      <UserCard visible={isOn} user={data} loading={isLoading} />
+      <UserCard visible={isOn} user={data} loading={isLoading} error={error} />
     </div>
   );
 };
 
 ListItem.defaultProps = {
-  collapseCard: () => {},
   user: {},
 };
 
 ListItem.propTypes = {
-  collapseCard: PropTypes.func,
   user: PropTypes.object,
 };
 
