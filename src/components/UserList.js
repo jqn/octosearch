@@ -7,9 +7,6 @@ import ErrorCard from "./ErrorCard";
 const uuidv4 = require("uuid/v4");
 
 const UserList = ({ users, error, loading }) => {
-  const [showCard, setShowCard] = useState(false);
-  const [id, setId] = useState(null);
-
   if (loading) {
     return <Spinner visible={loading} />;
   }
@@ -25,14 +22,7 @@ const UserList = ({ users, error, loading }) => {
   return (
     <div className="user-list">
       {users.map((user, index) => {
-        return (
-          <ListItem
-            key={`${index}-${uuidv4()}-${user.id}`}
-            user={user}
-            collapseCard={(collapse) => setShowCard(collapse)}
-            itemId={user.id}
-          />
-        );
+        return <ListItem key={`${index}-${uuidv4()}-${user.id}`} user={user} />;
       })}
     </div>
   );

@@ -26,8 +26,8 @@ const SearchForm = ({ setQuery }) => {
   );
 };
 
-SearchForm.defaultProps = { setQuery: () => {}, isLoading: false };
+SearchForm.defaultProps = { setQuery: () => {} };
 
-SearchForm.propTypes = { setQuery: PropTypes.func, isLoading: PropTypes.bool };
+SearchForm.propTypes = { setQuery: PropTypes.func };
 
 export default SearchForm;

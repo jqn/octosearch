@@ -24,7 +24,7 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { chunkData, setPageData, prev, next, currentPage } = usePagination();
+  const { chunkData, setPageData, prev, next } = usePagination();
 
   useEffect(
     () => {

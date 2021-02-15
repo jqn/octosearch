@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { BiFace, BiLinkAlt } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
@@ -105,12 +105,14 @@ UserCard.defaultProps = {
   visible: false,
   user: {},
   loading: false,
+  error: {},
 };
 
 UserCard.propTypes = {
   visible: PropTypes.bool,
   user: PropTypes.object,
   loading: PropTypes.bool,
+  error: PropTypes.object,
 };
 
 export default UserCard;
