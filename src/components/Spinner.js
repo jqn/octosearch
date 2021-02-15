@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { SiReact } from "react-icons/si";
 
-const Spinner = () => {
+const Spinner = ({ size }) => {
   return (
     <div className="atom-spinner">
-      <SiReact className="App-logo" size="4em" />
+      <SiReact className="App-logo" size={size} />
     </div>
   );
 };
 
-Spinner.defaultProps = {};
+Spinner.defaultProps = { size: "4em" };
 
-Spinner.propTypes = {};
+Spinner.propTypes = { size: PropTypes.string };
 
 export default Spinner;

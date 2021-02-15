@@ -118,7 +118,10 @@
 .user-list .more-icon {
   color: #586069;
   align-self: center;
-}
+  display: inline;
+  width: 2em;
+  text-align: center;
+} 
 
 .user-card {
   background-color: #FAFBFC;

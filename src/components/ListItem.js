@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
-import avatar from "assets/avatar.png";
 
 const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
   const [open, setOpen] = useState(false);
@@ -22,7 +21,7 @@ const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
         <span className="label">{user.login}</span>
       </div>
       <span className="more-icon align-self-end" onClick={toggleCard}>
-        <IoEllipsisVerticalOutline />
+        <IoEllipsisVerticalOutline size="1.5em" />
       </span>
     </div>
   );
