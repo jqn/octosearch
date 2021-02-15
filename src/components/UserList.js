@@ -7,7 +7,6 @@ import ErrorCard from "./ErrorCard";
 const uuidv4 = require("uuid/v4");
 
 const UserList = ({ users, error, loading }) => {
-  console.log("🚀 ~ file: UserList.js ~ line 10 ~ UserList ~ users", users);
   const [showCard, setShowCard] = useState(false);
   const [id, setId] = useState(null);
 

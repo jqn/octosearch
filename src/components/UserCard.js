@@ -1,80 +1,83 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { BiFace, BiLinkAlt } from "react-icons/bi";
+import { AiOutlineMail } from "react-icons/ai";
+import { MdWork, MdAttachMoney, MdPersonAdd } from "react-icons/md";
+import { FaGlobeAmericas } from "react-icons/fa";
+import { GoNote, GoRepoForked, GoPrimitiveDot } from "react-icons/go";
 
-const UserCard = ({
-  collapsed,
-  name,
-  userId,
-  activeId,
-  location,
-  email,
-  company,
-  public_repos,
-  public_gists,
-  bio,
-  followers,
-  html_url,
-}) => {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (userId === activeId) {
-      setOpen(collapsed);
+const Field = ({ label = "", text = "" }) => {
+  const getIcon = (label) => {
+    switch (label) {
+      case "name":
+        return <BiFace size="1.5em" />;
+      case "email":
+        return <AiOutlineMail size="1.5em" />;
+      case "company":
+        return <MdWork size="1.5em" />;
+      case "location":
+        return <FaGlobeAmericas size="1.5em" />;
+      case "bio":
+        return <GoNote size="1.5em" />;
+      case "hireable":
+        return <MdAttachMoney size="1.5em" />;
+      case "public_repos":
+        return <GoRepoForked size="1.5em" />;
+      case "followers":
+        return <MdPersonAdd size="1.5em" />;
+      case "html_url":
+        return <BiLinkAlt size="1.5em" />;
+      default:
+        return <GoPrimitiveDot size="1.5em" />;
     }
-  }, [collapsed, userId, activeId]);
+  };
+  return (
+    <p className="field-label">
+      {getIcon(label)}
+      <span className="field-text">{text ? text : "--"}</span>
+    </p>
+  );
+};
+
+const UserCard = ({ visible, user, loading }) => {
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
   return (
-    <>
-      {open ? (
-        <div className="user-card">
-          {/* <p className="field-label">
-            Name:<span className="field-text">{name}</span>
-          </p> */}
-          {/* <p className="field-label">
-            company:<span className="field-text">{company}</span>
-          </p>
-          <p className="field-label">
-            email:<span className="field-text">{email}</span>
-          </p>
-          <p className="field-label">
-            location:<span className="field-text">{location}</span>
-          </p>
-          <p className="field-label">
-            bio:
-            <span className="field-text">{bio}</span>
-          </p>
-          <p className="field-label">
-            public repos:<span className="field-text">{public_repos}</span>
-          </p>
-          <p className="field-label">
-            public gists:<span className="field-text">{public_gists}</span>
-          </p>
-          <p className="field-label">
-            followers:<span className="field-text">{followers}</span>
-          </p>
-          <p className="field-text">{html_url}</p> */}
+    <div className="user-card">
+      {visible ? (
+        <div className="content">
+          <Field label="name" text={user.name} />
+          <Field label="email" text={user.email} />
+          <Field label="company" text={user.company} />
+          <Field label="location" text={user.location} />
+          <Field label="bio" text={user.bio} />
+          <Field
+            label="hireable"
+            text={user.hireable ? "Yes" : user.hireable === false ? "No" : ""}
+          />
+          <Field label="public_repos" text={user.public_repos} />
+          <Field label="followers" text={user.followers} />
+          <Field label="html_url" text={user.html_url} />
         </div>
-      ) : null}
-    </>
+      ) : (
+        <div className="placeholder" />
+      )}
+    </div>
   );
 };
 
 UserCard.defaultProps = {
-  collapsed: false,
-  name: "Joaquin Guardado",
-  userId: null,
-  activeId: null,
-  location: "United States",
-  email: "",
-  company: "Reactor Labs",
-  public_repos: 388,
-  public_gists: 61,
-  bio: " I'm a problem solver and a designer of meaningful experiences.",
-  html_url: "https://github.com/jqn",
-  followers: 22,
+  visible: false,
+  user: {},
+  loading: false,
 };
 
 UserCard.propTypes = {
-  collapsed: PropTypes.bool,
+  visible: PropTypes.bool,
+  user: PropTypes.object,
+  loading: PropTypes.bool,
 };
 
 export default UserCard;
