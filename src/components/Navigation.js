@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { UserSearchContext } from "context/userSearchContext";
+import { SearchContext } from "context/searchContext";
 // import { usePagination } from "hooks/usePagination";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 const Navigation = ({ previous, next }) => {
-  const { resultCount } = useContext(UserSearchContext);
+  const { resultCount } = useContext(SearchContext);
   // const { next, previous } = usePagination(users, 20);
 
   const goBack = () => {

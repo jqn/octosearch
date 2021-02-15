@@ -1,13 +1,13 @@
 import "App.css";
 import Search from "screens/Search";
-import { UserSearchProvider } from "context/userSearchContext";
+import { SearchProvider } from "context/searchContext";
 
 function App() {
   return (
     <div className="App">
-      <UserSearchProvider>
+      <SearchProvider>
         <Search />
-      </UserSearchProvider>
+      </SearchProvider>
     </div>
   );
 }

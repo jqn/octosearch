@@ -12,10 +12,10 @@ import { useDebounce } from "hooks/useDebounce";
 import { usePagination } from "hooks/usePagination";
 
 import { apiClient } from "services/apiClient";
-import { UserSearchContext } from "context/userSearchContext";
+import { SearchContext } from "context/searchContext";
 
 const Search = () => {
-  const { setResults, users } = useContext(UserSearchContext);
+  const { setResults, users } = useContext(SearchContext);
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState("");
   const [userList, setUserList] = useState([]);
@@ -27,7 +27,7 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { currentData, next, prev } = usePagination(users, 20);
+  const { currentData, next, prev, jump } = usePagination(users, 20);
 
   useEffect(
     () => {
@@ -73,6 +73,7 @@ const Search = () => {
     if (data) {
       setResults(data);
       setUserList(data.items);
+      jump(1);
     }
   }, [data, setResults]);
 
@@ -84,7 +85,7 @@ const Search = () => {
   }, [error, setResults]);
 
   useEffect(() => {
-    setUserList(currentData());
+    // setUserList(currentData());
   }, [currentData]);
 
   return (
@@ -96,7 +97,7 @@ const Search = () => {
       {isSuccess ? (
         <>
           <Navigation previous={prev} next={next} />
-          <UserList users={userList} />
+          <UserList users={currentData()} />
         </>
       ) : null}
     </div>
