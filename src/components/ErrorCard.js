@@ -1,42 +1,41 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import errorIcon from "assets/errorIcon.png";
 
-const ErrorCard = ({ error }) => {
-  const [status, setStatus] = useState(200);
-  console.log("🚀 ~ file: ErrorCard.js ~ line 5 ~ ErrorCard ~ status", error);
+const ErrorCard = ({ status }) => {
+  const [text, setText] = useState("");
 
   useEffect(() => {
-    if (error.response) {
-      setStatus(error.response.status);
-    } else {
-      setStatus(500);
+    switch (status) {
+      case 403:
+        setText("Rate Limit Exceeded");
+        break;
+      case 503:
+        setText("Service Unavailable");
+        break;
+      default:
+        setText("Something Unexpected Happened!");
+        break;
     }
-  }, [error.response]);
-
-  const renderStatus = () => {
-    if (status === 403) {
-      return <pre>Rate Limit Exceeded</pre>;
-    }
-    if (status === 500) {
-      return <pre>Couldn't handle your request!</pre>;
-    }
-
-    if (status === 503) {
-      return <pre>Service Unavailable</pre>;
-    }
-    return <pre>Something Unexpected Happened!</pre>;
-  };
+  }, [status]);
 
   return (
     <div className="error-card">
-      <p>There was an error:</p>
-      {renderStatus()}
+      <div className="content">
+        <img className="error-icon" src={errorIcon} alt="avatar" />
+        <p>There was an error:</p>
+        <pre>{text}</pre>
+      </div>
     </div>
   );
 };
 
-ErrorCard.defaultProps = { error: {} };
+ErrorCard.defaultProps = {
+  status: null,
+};
 
-ErrorCard.propTypes = { error: PropTypes.object };
+ErrorCard.propTypes = {
+  status: PropTypes.number,
+};
 
 export default ErrorCard;

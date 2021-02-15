@@ -4,17 +4,19 @@ export const SearchContext = createContext();
 SearchContext.displayName = "SearchContext";
 
 export const SearchProvider = ({ children }) => {
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState([]);
+  const [searchData, setSearchData] = useState([]);
+  const [count, setCount] = useState(0);
 
   const setResults = useCallback((results) => {
-    setData(results.items);
+    setSearchData(results.items);
+    setCount(results.total_count);
   }, []);
 
   return (
     <SearchContext.Provider
       value={{
-        data,
+        searchData,
+        count,
         setResults,
       }}
     >

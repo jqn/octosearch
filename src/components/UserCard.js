@@ -34,10 +34,10 @@ const UserCard = ({
     <>
       {open ? (
         <div className="user-card">
-          <p className="field-label">
+          {/* <p className="field-label">
             Name:<span className="field-text">{name}</span>
-          </p>
-          <p className="field-label">
+          </p> */}
+          {/* <p className="field-label">
             company:<span className="field-text">{company}</span>
           </p>
           <p className="field-label">
@@ -59,7 +59,7 @@ const UserCard = ({
           <p className="field-label">
             followers:<span className="field-text">{followers}</span>
           </p>
-          <p className="field-text">{html_url}</p>
+          <p className="field-text">{html_url}</p> */}
         </div>
       ) : null}
     </>

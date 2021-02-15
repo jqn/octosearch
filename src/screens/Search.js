@@ -15,10 +15,9 @@ import { apiClient } from "services/apiClient";
 import { SearchContext } from "context/searchContext";
 
 const Search = () => {
-  const { setResults, users } = useContext(SearchContext);
-  const { data, error, run, isLoading, isError, isSuccess } = useAsync();
+  const { setResults, searchData } = useContext(SearchContext);
+  const { data, error, run, isLoading } = useAsync();
   const [query, setQuery] = useState("");
-  const [userList, setUserList] = useState([]);
   const [queried, setQueried] = useState(false);
   // Debounce search term to only keep the latest value
   // if searchTerm has not been updated within last 500ms.
@@ -27,21 +26,18 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { currentData, next, prev, jump } = usePagination(users, 20);
+  const { currentData, next, prev, jump } = usePagination(searchData, 20);
 
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        console.log(
-          "🚀 ~ file: Search.js ~ line 31 ~ Search ~ debouncedSearchTerm",
-          debouncedSearchTerm
-        );
         setQueried(true);
       } else {
         setQueried(false);
       }
     },
-    [debouncedSearchTerm] // Only call effect if debounced search term changes
+    // Only call effect if debounced search term changes
+    [debouncedSearchTerm]
   );
 
   useEffect(() => {
@@ -72,34 +68,21 @@ const Search = () => {
   useEffect(() => {
     if (data) {
       setResults(data);
-      setUserList(data.items);
-      jump(1);
     }
   }, [data, setResults]);
 
   useEffect(() => {
     if (error) {
-      console.log("🚀 ~ file: Search.js ~ line 51 ~ useEffect ~ error", error);
       setResults({ items: [], total_count: 0 });
     }
   }, [error, setResults]);
-
-  useEffect(() => {
-    // setUserList(currentData());
-  }, [currentData]);
 
   return (
     <div className="search">
       <Header />
       <SearchForm setQuery={(value) => setQuery(value)} searching={isLoading} />
-      {isLoading ? <Spinner /> : null}
-      {isError ? <ErrorCard error={error} /> : null}
-      {isSuccess ? (
-        <>
-          <Navigation previous={prev} next={next} />
-          <UserList users={currentData()} />
-        </>
-      ) : null}
+      <Navigation previous={prev} next={next} />
+      <UserList users={searchData} error={error} loading={isLoading} />
     </div>
   );
 };
