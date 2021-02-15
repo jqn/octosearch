@@ -1,24 +1,19 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { UserSearchContext } from "context/userSearchContext";
+// import { usePagination } from "hooks/usePagination";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-const Navigation = () => {
-  const { resultCount, setPage, page } = useContext(UserSearchContext);
+const Navigation = ({ previous, next }) => {
+  const { resultCount } = useContext(UserSearchContext);
+  // const { next, previous } = usePagination(users, 20);
 
   const goBack = () => {
-    setPage(1);
+    previous();
   };
 
   const goForward = () => {
-    let pageCount = Math.round(resultCount / 20);
-
-    if (page <= pageCount - 1) {
-      setPage(page + 1);
-      console.log("page", page);
-    } else {
-      console.log("done");
-    }
+    next();
   };
 
   return (
@@ -40,8 +35,16 @@ const Navigation = () => {
   );
 };
 
-Navigation.defaultProps = {};
+Navigation.defaultProps = {
+  // setPage: 1,
+  previous: () => {},
+  next: () => {},
+};
 
-Navigation.propTypes = {};
+Navigation.propTypes = {
+  // setPage: PropTypes.number,
+  previous: PropTypes.func,
+  next: PropTypes.func,
+};
 
 export default Navigation;

@@ -4,8 +4,8 @@ import ListItem from "./ListItem";
 import UserCard from "./UserCard";
 import { UserSearchContext } from "context/userSearchContext";
 
-const UserList = () => {
-  const { users } = useContext(UserSearchContext);
+const UserList = ({ users }) => {
+  // const { users } = useContext(UserSearchContext);
   const [showCard, setShowCard] = useState(false);
   const [id, setId] = useState(null);
 

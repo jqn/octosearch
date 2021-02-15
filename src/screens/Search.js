@@ -9,13 +9,16 @@ import ErrorCard from "components/ErrorCard";
 
 import { useAsync } from "hooks/useAsync";
 import { useDebounce } from "hooks/useDebounce";
+import { usePagination } from "hooks/usePagination";
+
 import { apiClient } from "services/apiClient";
 import { UserSearchContext } from "context/userSearchContext";
 
 const Search = () => {
-  const { setResults } = useContext(UserSearchContext);
+  const { setResults, users } = useContext(UserSearchContext);
   const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const [query, setQuery] = useState("");
+  const [userList, setUserList] = useState([]);
   const [queried, setQueried] = useState(false);
   // Debounce search term to only keep the latest value
   // if searchTerm has not been updated within last 500ms.
@@ -24,6 +27,7 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
+  const { currentData, next, prev } = usePagination(users, 20);
 
   useEffect(
     () => {
@@ -68,6 +72,7 @@ const Search = () => {
   useEffect(() => {
     if (data) {
       setResults(data);
+      setUserList(data.items);
     }
   }, [data, setResults]);
 
@@ -78,6 +83,10 @@ const Search = () => {
     }
   }, [error, setResults]);
 
+  useEffect(() => {
+    setUserList(currentData());
+  }, [currentData]);
+
   return (
     <div className="search">
       <Header />
@@ -86,8 +95,8 @@ const Search = () => {
       {isError ? <ErrorCard error={error} /> : null}
       {isSuccess ? (
         <>
-          <Navigation />
-          <UserList />
+          <Navigation previous={prev} next={next} />
+          <UserList users={userList} />
         </>
       ) : null}
     </div>
