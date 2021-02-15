@@ -123,6 +123,13 @@
   border-radius: 50%;
 }
 
+.search .error-card .coffee-time {
+  height: 14rem;
+  margin-bottom: 1rem;
+  pointer-events: none;
+  /* border-radius: 50%; */
+}
+
 .user-list {
   border-bottom: none;
   text-align: left;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import errorIcon from "assets/errorIcon.png";
+import coffeeTime from "assets/coffeeTime.png";
 
 const ErrorCard = ({ status }) => {
   const [text, setText] = useState("");
@@ -8,7 +9,7 @@ const ErrorCard = ({ status }) => {
   useEffect(() => {
     switch (status) {
       case 403:
-        setText("Rate Limit Exceeded");
+        setText("Number of requests exceeded.\n Time for some coffee.");
         break;
       case 503:
         setText("Service Unavailable");
@@ -22,7 +23,15 @@ const ErrorCard = ({ status }) => {
   return (
     <div className="error-card">
       <div className="content">
-        <img className="error-icon" src={errorIcon} alt="avatar" />
+        {status === 403 ? (
+          <img
+            className="coffee-time"
+            src={coffeeTime}
+            alt="rate exceeded icon"
+          />
+        ) : (
+          <img className="error-icon" src={errorIcon} alt="error icon" />
+        )}
         <p>There was an error:</p>
         <pre>{text}</pre>
       </div>

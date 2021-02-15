@@ -19,7 +19,12 @@ const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
       <div className="left-container">
         <img className="avatar" src={user.avatar_url} alt="avatar" />
         <span className="label">
-          <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={user.html_url}
+            className="link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {user.login}
           </a>
         </span>
