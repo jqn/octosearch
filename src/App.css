@@ -31,6 +31,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -141,8 +142,8 @@
 .user-list .item .row {
   display: flex;
   justify-content: space-between;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid #E1E4E8;
 }
 
@@ -184,10 +185,10 @@
 }
 
 .user-list .loader {
-   min-height: 5vh;
-   padding-left: 1em;
-   padding-top: 0.5em;
-   background-color: #FAFBFC;
+  min-height: 5vh;
+  padding-left: 1em;
+  padding-top: 0.5em;
+  background-color: #FAFBFC;
 }
 
 .user-card {
@@ -198,6 +199,7 @@
   margin-left: 1em;
   padding-top: 1em;
   padding-bottom: 0.5em;
+  border-bottom: 1px solid #E1E4E8;
 }
 
 .user-card .field-label {
@@ -208,4 +210,3 @@
   font-weight: 300;
   margin-left: 1em;
 }
-
