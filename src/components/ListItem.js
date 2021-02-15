@@ -8,27 +8,18 @@ import { useLocalStorage } from "hooks/useLocalStorage";
 import { apiClient } from "services/apiClient";
 
 const ListItem = ({ user }) => {
-  // console.log("🚀 ~ file: ListItem.js ~ line 11 ~ ListItem ~ user", user);
   const { data, error, run, isLoading } = useAsync();
   const [isOn, toggleIsOn] = useToggle();
-  const [userDetails, setUserDetails] = useLocalStorage(`user-${user.id}`, "");
+  const [userDetails, setUserDetails] = useLocalStorage(`user-${user.id}`, {});
 
   const toggleCard = () => {
-    console.log(
-      "🚀 ~ file: ListItem.js ~ line 15 ~ ListItem ~ userDetails",
-      userDetails
-    );
-    toggleIsOn();
     // Persist user data and check if user data
     // exists. If user data get from local storage
     // or call api
-    if (!userDetails) {
-      console.log(
-        "🚀 ~ file: ListItem.js ~ line 25 ~ toggleCard ~ userDetails",
-        userDetails
-      );
+    if (Object.keys(userDetails).length === 0) {
       run(apiClient(`users/${encodeURIComponent(user.login)}`));
     }
+    toggleIsOn();
   };
 
   useEffect(() => {
