@@ -105,7 +105,7 @@
 }
 
 .user-list .avatar {
-    height: 4vmin;
+    height: 6vmin;
     pointer-events: none;
     border-radius: 50%;
 }
@@ -121,6 +121,7 @@
   display: inline;
   width: 2em;
   text-align: center;
+  cursor: pointer;
 } 
 
 .user-card {
