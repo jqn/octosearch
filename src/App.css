@@ -9,6 +9,18 @@
   pointer-events: none;
 }
 
+.App-header {
+  font-size: calc(10px + 2vmin);
+  text-align: left;
+  margin-bottom: 1rem;
+  color: #586069;
+}
+
+.App-link {
+  color: #61DAFB;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 2s linear;
@@ -25,17 +37,6 @@
   }
 }
 
-
-.App-header {
-  font-size: calc(10px + 2vmin);
-  text-align: left;
-  margin-bottom: 1rem;
-  color: #586069;
-}
-
-.App-link {
-  color: #61DAFB;
-}
 
 .search {
   margin-right: 0.5em;
@@ -162,6 +163,14 @@
   width: 2em;
   text-align: center;
   cursor: pointer;
+}
+
+.user-list .item a {
+  color: #586069
+}
+
+.user-list .item a:hover {
+  color: #0366D6
 }
 
 .user-card {

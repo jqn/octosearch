@@ -26,7 +26,7 @@ export const usePagination = () => {
   const jump = (page) => {
     // Set current page and stay within limits
     const pageNumber = Math.max(1, page);
-    setCurrentPage((currentPage) => Math.min(pageNumber, maxPage));
+    setCurrentPage(() => Math.min(pageNumber, maxPage));
   };
 
   return {

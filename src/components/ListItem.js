@@ -18,7 +18,11 @@ const ListItem = ({ avatar, user, url, collapseCard, setItemId }) => {
     <div className="item">
       <div className="left-container">
         <img className="avatar" src={user.avatar_url} alt="avatar" />
-        <span className="label">{user.login}</span>
+        <span className="label">
+          <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+            {user.login}
+          </a>
+        </span>
       </div>
       <span className="more-icon align-self-end" onClick={toggleCard}>
         <IoEllipsisVerticalOutline size="1.5em" />
