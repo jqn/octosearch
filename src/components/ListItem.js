@@ -4,22 +4,36 @@ import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import UserCard from "./UserCard";
 import { useToggle } from "hooks/useToggle";
 import { useAsync } from "hooks/useAsync";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { apiClient } from "services/apiClient";
 
 const ListItem = ({ user }) => {
+  // console.log("🚀 ~ file: ListItem.js ~ line 11 ~ ListItem ~ user", user);
   const { data, error, run, isLoading } = useAsync();
   const [isOn, toggleIsOn] = useToggle();
+  const [userDetails, setUserDetails] = useLocalStorage(`user-${user.id}`, "");
 
   const toggleCard = () => {
     if (isOn) {
       toggleIsOn();
       return;
     }
-    run(apiClient(`users/${encodeURIComponent(user.login)}`));
-    // consider persisting user data and checking if user data
-    // exists. If user data get from localstorage or call api
+    // Persist user data and check if user data
+    // exists. If user data get from local storage
+    // or call api
+    if (!userDetails) {
+      run(apiClient(`users/${encodeURIComponent(user.login)}`));
+    } else {
+      setUserDetails(userDetails);
+    }
     toggleIsOn();
   };
+
+  useEffect(() => {
+    if (data) {
+      setUserDetails(data);
+    }
+  }, [data, setUserDetails]);
 
   return (
     <div className="item">

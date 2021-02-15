@@ -49,6 +49,7 @@
 .navigation-bar .controls {
   padding: 0.3rem 0.8rem 0.4rem 0.2rem;
   background-color: #FAFBFC;
+  border-bottom: 1px solid #E1E4E8;
 }
 
 .navigation-bar .back {
@@ -182,6 +183,13 @@
   color: #0366D6
 }
 
+.user-list .loader {
+   min-height: 5vh;
+   padding-left: 1em;
+   padding-top: 0.5em;
+   background-color: #FAFBFC;
+}
+
 .user-card {
   background-color: #FAFBFC;
 }
@@ -201,9 +209,3 @@
   margin-left: 1em;
 }
 
-.user-list .loader {
-   min-height: 5vh;
-   padding-left: 1em;
-   padding-top: 0.5em;
-   background-color: #FAFBFC;
-}
