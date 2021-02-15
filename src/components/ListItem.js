@@ -14,19 +14,21 @@ const ListItem = ({ user }) => {
   const [userDetails, setUserDetails] = useLocalStorage(`user-${user.id}`, "");
 
   const toggleCard = () => {
-    if (isOn) {
-      toggleIsOn();
-      return;
-    }
+    console.log(
+      "🚀 ~ file: ListItem.js ~ line 15 ~ ListItem ~ userDetails",
+      userDetails
+    );
+    toggleIsOn();
     // Persist user data and check if user data
     // exists. If user data get from local storage
     // or call api
     if (!userDetails) {
+      console.log(
+        "🚀 ~ file: ListItem.js ~ line 25 ~ toggleCard ~ userDetails",
+        userDetails
+      );
       run(apiClient(`users/${encodeURIComponent(user.login)}`));
-    } else {
-      setUserDetails(userDetails);
     }
-    toggleIsOn();
   };
 
   useEffect(() => {
@@ -55,7 +57,12 @@ const ListItem = ({ user }) => {
           <IoEllipsisVerticalOutline size="1.5em" />
         </span>
       </div>
-      <UserCard visible={isOn} user={data} loading={isLoading} error={error} />
+      <UserCard
+        visible={isOn}
+        user={userDetails}
+        loading={isLoading}
+        error={error}
+      />
     </div>
   );
 };

@@ -73,28 +73,32 @@ const UserCard = ({ visible, user, loading, error }) => {
     );
   }
 
-  return (
-    <div className="user-card">
-      {visible ? (
-        <div className="content">
-          <Field label="name" text={user.name} />
-          <Field label="email" text={user.email} />
-          <Field label="company" text={user.company} />
-          <Field label="location" text={user.location} />
-          <Field label="bio" text={user.bio} />
-          <Field
-            label="hireable"
-            text={user.hireable ? "Yes" : user.hireable === false ? "No" : ""}
-          />
-          <Field label="public_repos" text={user.public_repos} />
-          <Field label="followers" text={user.followers} />
-          <Field label="html_url" text={user.html_url} />
-        </div>
-      ) : (
-        <div className="placeholder" />
-      )}
-    </div>
-  );
+  if (user) {
+    return (
+      <div className="user-card">
+        {visible ? (
+          <div className="content">
+            <Field label="name" text={user.name} />
+            <Field label="email" text={user.email} />
+            <Field label="company" text={user.company} />
+            <Field label="location" text={user.location} />
+            <Field label="bio" text={user.bio} />
+            <Field
+              label="hireable"
+              text={user.hireable ? "Yes" : user.hireable === false ? "No" : ""}
+            />
+            <Field label="public_repos" text={user.public_repos} />
+            <Field label="followers" text={user.followers} />
+            <Field label="html_url" text={user.html_url} />
+          </div>
+        ) : (
+          <div className="placeholder" />
+        )}
+      </div>
+    );
+  }
+
+  return <div className="placeholder" />;
 };
 
 UserCard.defaultProps = {
