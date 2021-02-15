@@ -1,14 +1,16 @@
 import { useState } from "react";
 
-export const usePagination = (data = [], itemsPerPage = 20) => {
+export const usePagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [pageData, setPageData] = useState([]);
 
-  const maxPage = Math.ceil(data.length / itemsPerPage);
+  const maxPage = Math.ceil(pageData.length / itemsPerPage);
   // Set current data to display
-  const currentData = () => {
+  const chunkData = () => {
     const begin = (currentPage - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
-    return data.slice(begin, end);
+    return pageData.slice(begin, end);
   };
 
   const next = () => {
@@ -27,5 +29,15 @@ export const usePagination = (data = [], itemsPerPage = 20) => {
     setCurrentPage((currentPage) => Math.min(pageNumber, maxPage));
   };
 
-  return { next, prev, jump, currentData, currentPage, maxPage };
+  return {
+    next,
+    prev,
+    jump,
+    chunkData,
+    currentPage,
+    maxPage,
+    pageData,
+    setPageData,
+    setItemsPerPage,
+  };
 };

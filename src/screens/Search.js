@@ -4,8 +4,6 @@ import Header from "components/Header";
 import UserList from "components/UserList";
 import Navigation from "components/Navigation";
 import SearchForm from "components/SearchForm";
-import Spinner from "components/Spinner";
-import ErrorCard from "components/ErrorCard";
 
 import { useAsync } from "hooks/useAsync";
 import { useDebounce } from "hooks/useDebounce";
@@ -15,7 +13,7 @@ import { apiClient } from "services/apiClient";
 import { SearchContext } from "context/searchContext";
 
 const Search = () => {
-  const { setResults, searchData } = useContext(SearchContext);
+  const { setResults } = useContext(SearchContext);
   const { data, error, run, isLoading } = useAsync();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
@@ -26,7 +24,7 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { currentData, next, prev, jump } = usePagination(searchData, 20);
+  const { chunkData, setPageData, prev, next, currentPage } = usePagination();
 
   useEffect(
     () => {
@@ -62,27 +60,30 @@ const Search = () => {
   useEffect(() => {
     if (!query) {
       setResults({ items: [], total_count: 0 });
+      setPageData([]);
     }
-  }, [query, setResults]);
+  }, [query, setPageData, setResults]);
 
   useEffect(() => {
     if (data) {
       setResults(data);
+      setPageData(data.items);
     }
-  }, [data, setResults]);
+  }, [data, setResults, setPageData]);
 
   useEffect(() => {
     if (error) {
       setResults({ items: [], total_count: 0 });
+      setPageData([]);
     }
-  }, [error, setResults]);
+  }, [error, setResults, setPageData]);
 
   return (
     <div className="search">
       <Header />
       <SearchForm setQuery={(value) => setQuery(value)} searching={isLoading} />
       <Navigation previous={prev} next={next} />
-      <UserList users={searchData} error={error} loading={isLoading} />
+      <UserList users={chunkData()} error={error} loading={isLoading} />
     </div>
   );
 };

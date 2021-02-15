@@ -16,19 +16,15 @@ const Navigation = ({ previous, next }) => {
 
   return (
     <div className="navigation-bar">
-      {count ? (
-        <div className="controls">
-          <span className="back" onClick={goBack}>
-            <IoChevronBack />
-          </span>
-          <span className="forward" onClick={goForward}>
-            <IoChevronForward />
-          </span>
-          <span className="count">{count}</span>
-        </div>
-      ) : (
-        <div className="separator" />
-      )}
+      <div className="controls">
+        <span className="back" onClick={goBack}>
+          <IoChevronBack />
+        </span>
+        <span className="forward" onClick={goForward}>
+          <IoChevronForward />
+        </span>
+        <span className="count">{count}</span>
+      </div>
     </div>
   );
 };

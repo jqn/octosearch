@@ -18,14 +18,6 @@ const UserCard = ({
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (userId === activeId) {
-      console.log(
-        "🚀 ~ file: UserCard.js ~ line 21 ~ useEffect ~ activeId",
-        activeId
-      );
-      console.log(
-        "🚀 ~ file: UserCard.js ~ line 21 ~ useEffect ~ userId",
-        userId
-      );
       setOpen(collapsed);
     }
   }, [collapsed, userId, activeId]);
