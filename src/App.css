@@ -56,6 +56,13 @@
   background-color: #FAFBFC;
   border-bottom: 1px solid #E1E4E8;
 }
+.navigation-bar .first {
+  padding: 0.25em
+}
+
+.navigation-bar .last {
+  padding: 0.25em
+}
 
 .navigation-bar .back {
   padding: 0.25em

@@ -24,7 +24,7 @@ const Search = () => {
   // Github API Rate Limit of 10 request/minute
   // Up to 1000 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { chunkData, setPageData, prev, next } = usePagination();
+  const { chunkData, setPageData, prev, next, jump, maxPage } = usePagination();
 
   useEffect(
     () => {
@@ -78,11 +78,23 @@ const Search = () => {
     }
   }, [error, setResults, setPageData]);
 
+  const jumpToPage = (page) => {
+    if (page === "last") {
+      jump(maxPage);
+      return;
+    }
+    jump(page);
+  };
+
   return (
     <div className="search">
       <Header />
       <SearchForm setQuery={(value) => setQuery(value)} searching={isLoading} />
-      <Navigation previous={prev} next={next} />
+      <Navigation
+        previous={prev}
+        next={next}
+        jump={(value) => jumpToPage(value)}
+      />
       <UserList users={chunkData()} error={error} loading={isLoading} />
     </div>
   );
