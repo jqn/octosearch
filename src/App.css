@@ -16,6 +16,10 @@
   color: #586069;
 }
 
+.App-header .header-icon {
+  margin-left: 0.2em;
+}
+
 .App-link {
   color: #61DAFB;
 }
@@ -68,6 +72,7 @@
 .navigation-bar .separator {
   border-bottom: 1px solid #E1E4E8;
 }
+
 
 .search-form {
   color: #586069;
@@ -157,7 +162,7 @@
 
 .user-list .avatar {
   margin-left: 0.5em;
-  height: 6vmin;
+  height: 4.5em;
   pointer-events: none;
   border-radius: 50%;
 }

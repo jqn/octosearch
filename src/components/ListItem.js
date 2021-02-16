@@ -45,7 +45,7 @@ const ListItem = ({ user }) => {
           </span>
         </div>
         <span className="more-icon align-self-end" onClick={toggleCard}>
-          <IoEllipsisVerticalOutline size="2em" />
+          <IoEllipsisVerticalOutline size="2.2em" />
         </span>
       </div>
       <UserCard
