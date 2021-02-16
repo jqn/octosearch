@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Header from "components/Header";
 import UserList from "components/UserList";
@@ -17,14 +17,23 @@ const Search = () => {
   const { data, error, run, isLoading } = useAsync();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
+  const [queryPage, setQueryPage] = useState(1);
   // Debounce search term to only keep the latest value
   // if searchTerm has not been updated within last 500ms.
   // The goal is to only have the API call fire when user stops typing
   // so that we aren't hitting our API rapidly.
   // Github API Rate Limit of 10 request/minute
-  // Up to 1000 results per request
+  // Up to 100 results per request
   const debouncedSearchTerm = useDebounce(query, 500);
-  const { chunkData, setPageData, prev, next, jump, maxPage } = usePagination();
+  const {
+    chunkData,
+    setPageData,
+    prev,
+    next,
+    jump,
+    maxPage,
+    currentPage,
+  } = usePagination();
 
   useEffect(
     () => {
@@ -51,7 +60,7 @@ const Search = () => {
 
     run(
       apiClient(
-        `search/users?q=${encodeURIComponent(query)}&per_page=1000&page=${1}`
+        `search/users?q=${encodeURIComponent(query)}&per_page=100&page=1`
       )
     );
     setQueried(false);
@@ -83,7 +92,20 @@ const Search = () => {
       jump(maxPage);
       return;
     }
-    jump(page);
+    jump(1);
+  };
+
+  const getMore = () => {
+    setQueryPage((prevState) => prevState + 1);
+    let nextPage = queryPage + 1;
+    run(
+      apiClient(
+        `search/users?q=${encodeURIComponent(
+          query
+        )}&per_page=100&page=${nextPage}`
+      )
+    );
+    jump(1);
   };
 
   return (
@@ -94,6 +116,10 @@ const Search = () => {
         previous={prev}
         next={next}
         jump={(value) => jumpToPage(value)}
+        currentPage={currentPage}
+        maxPage={maxPage}
+        queryPage={queryPage}
+        getMore={getMore}
       />
       <UserList users={chunkData()} error={error} loading={isLoading} />
     </div>

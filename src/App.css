@@ -52,28 +52,40 @@
 }
 
 .navigation-bar .controls {
-  padding: 0.3rem 0.8rem 0.4rem 0.2rem;
+  padding: 0.3rem 0.4rem 0.4rem 0.2rem;
   background-color: #FAFBFC;
   border-bottom: 1px solid #E1E4E8;
 }
+
+.navigation-bar .page {
+  padding: 0.25em;
+}
+
 .navigation-bar .first {
-  padding: 0.25em
+  padding: 0.25em;
+  cursor: pointer;
 }
 
 .navigation-bar .last {
-  padding: 0.25em
+  padding: 0.25em;
+  cursor: pointer;
 }
 
 .navigation-bar .back {
-  padding: 0.25em
+  padding: 0.25em;
+  cursor: pointer;
 }
 
 .navigation-bar .forward {
-  padding: 0.25em
+  padding: 0.25em;
+  cursor: pointer;
 }
 
 .navigation-bar .count {
   padding: 0.25em;
+}
+.navigation-bar .add {
+  padding-left: 0.25em;
 }
 
 .navigation-bar .separator {
