@@ -39,6 +39,7 @@ const Navigation = ({
   useEffect(() => {
     if (currentPage === 1 && queryPage >= 2) {
       // Calculate correct page number
+      // for jump to first page
       // we always have 5 pages
       // so multiply by query page and remove 4
       setPage(queryPage * 5 - 4);
@@ -46,15 +47,10 @@ const Navigation = ({
     }
     if (currentPage === 5 && queryPage >= 2) {
       // Calculate correct page number
+      // for jump to first page
       // we always have 5 pages
       // so multiply by query page
       setPage(queryPage * 5);
-      return;
-    }
-    if (currentPage === 1 && queryPage === 1) {
-      // We are in the first 100 records
-      // no need to calculate current page
-      setPage(currentPage);
       return;
     }
     if (currentPage >= 2 && queryPage >= 2) {
@@ -71,6 +67,9 @@ const Navigation = ({
       setPage((prevState) => prevState - 1);
       return;
     }
+    // We are in the first 100 records
+    // run default action
+    setPage(currentPage);
   }, [currentPage, queryPage]);
 
   return (
