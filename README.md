@@ -2,7 +2,19 @@
 
 GitHub user search React application
 
-## Getting Started with Create React App
+![Reference Designs Search](./src/assets/screenshot.png)
+
+**Repo:** https://github.com/jqn/octosearch.git
+
+**Live Demo:** http://octosearch.reactorlabs.studio/
+
+### Features
+
+- Context
+- Hooks
+- Local Persist
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
