@@ -9,6 +9,7 @@ const Header = () => {
         <span className="header-icon">
           <GiOctopus />
         </span>
+        <span className="action-call">Give me some searches!</span>
       </h3>
     </header>
   );

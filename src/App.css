@@ -20,6 +20,12 @@
   margin-left: 0.2em;
 }
 
+.App-header .action-call {
+  font-size: calc(2px + 2vmin);
+  font-weight: 300;
+  padding-left: 0.5em;
+}
+
 .App-link {
   color: #61DAFB;
 }

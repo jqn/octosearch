@@ -11,6 +11,9 @@ const ErrorCard = ({ status }) => {
       case 403:
         setText("Number of requests exceeded.\n Time for some coffee.");
         break;
+      case 422:
+        setText("We couldn't process your request.\n Please try again.");
+        break;
       case 503:
         setText("Service Unavailable");
         break;

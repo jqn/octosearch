@@ -14,7 +14,7 @@ import { SearchContext } from "context/searchContext";
 
 const Search = () => {
   const { setResults } = useContext(SearchContext);
-  const { data, error, run, isLoading } = useAsync();
+  const { data, error, run, isLoading, setError } = useAsync();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
   const [queryPage, setQueryPage] = useState(1);
@@ -87,6 +87,12 @@ const Search = () => {
     }
   }, [error, setResults, setPageData]);
 
+  const runQuery = (value) => {
+    setQueryPage(1);
+    setQuery(value);
+    setError(null);
+  };
+
   const jumpToPage = (page) => {
     if (page === "last") {
       jump(maxPage);
@@ -111,7 +117,7 @@ const Search = () => {
   return (
     <div className="search">
       <Header />
-      <SearchForm setQuery={(value) => setQuery(value)} searching={isLoading} />
+      <SearchForm setQuery={(value) => runQuery(value)} searching={isLoading} />
       <Navigation
         previous={prev}
         next={next}
